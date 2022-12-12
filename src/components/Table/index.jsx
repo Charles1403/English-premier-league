@@ -36,11 +36,11 @@ function Table({Stats}) {
       }
     })
     let sortFixtures = [...Fixtures].sort((a,b) => a.date - b.date)
-    let sortPendingFixtures = [...pendingFixtures].sort((a, b) => a.date - b.date)
-    sortFixtures.map((item) => item.date = format(new Date(item.date), 'dd/MM, H:mm'))
-    sortPendingFixtures.map((item) => item.date = format(new Date(item.date), 'dd/MM, H:mm'))
-    setFixtures(sortFixtures)
-    setPendingfixtures(sortPendingFixtures)
+    let sortPendingFixtures = [...pendingFixtures].sort((a, b) => a.date - b.date);
+    const sFixtures = sortFixtures.map((item) => ({...item, date: format(new Date(item.date), 'dd/MM, H:mm')}))
+    const pFixtures = sortPendingFixtures.map((item) => ({...item, date: format(new Date(item.date), 'dd/MM, H:mm')})) 
+    setFixtures(sFixtures)
+    setPendingfixtures(pFixtures)
     navigate(`/${item.name}/fixtures`)
   }
 
