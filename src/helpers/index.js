@@ -1,8 +1,14 @@
 import { data } from "../data";
 
+const cloneData = (() => {
+  let dataClone = []
+  data.map((item) => dataClone.push(item))
+  return dataClone
+})()
+
 export const getListOfClubs = (() => {
     let set = new Set()
-    data.map((item) => Object.keys(item.score).map((item) => set.add(item)))
+    cloneData.map((item) => Object.keys(item.score).map((item) => set.add(item)))
     return [...set];
   })()
   
@@ -10,7 +16,7 @@ export const getListOfClubs = (() => {
     let map1 = new Map()
     let arrOfMap1 = []
     let arrOfWinners = []
-    data.map((item) => map1.set(...Object.entries(item.score)))
+    cloneData.map((item) => map1.set(...Object.entries(item.score)))
     arrOfMap1.push([...map1])
     let result = arrOfMap1.map((item) => item.map((i) => i.reduce((a, e) => {
           if (e[1] > a[1]) return e
@@ -28,7 +34,7 @@ export const getListOfClubs = (() => {
     let map2 = new Map()
     let arrOfMap2 = []
     let arrOfLosers = []
-      data.map((item) => map2.set(...Object.entries(item.score)))
+      cloneData.map((item) => map2.set(...Object.entries(item.score)))
       arrOfMap2.push([...map2])
       let result = arrOfMap2.map((item) => item.map((i) => i.reduce((a, e) => {
         if (e[1] < a[1]) return e
@@ -48,7 +54,7 @@ export const getListOfClubs = (() => {
     let arr = []
     let set = new Set()
     let arrOfDraws = []
-      data.map((item) => map3.set(...Object.entries(item.score)))
+      cloneData.map((item) => map3.set(...Object.entries(item.score)))
       arrOfMap3 = [...map3]
       arrOfMap3.map((item) => item.map((i) => {
         if (i[1] === null) return null
@@ -67,7 +73,7 @@ export const getListOfClubs = (() => {
   let map4 = new Map()
   let arrOfMap4 = []
   let emptyArr = []
-    data.map((item) => map4.set(...Object.entries(item.score)))
+    cloneData.map((item) => map4.set(...Object.entries(item.score)))
     arrOfMap4.push([...map4])
     arrOfMap4.map((arr) => arr.map((item) => item.map((i) => emptyArr.push(i))))
     let Obj = emptyArr.map((item) => item.reduce((a, v) => {
@@ -92,7 +98,7 @@ export const getListOfClubs = (() => {
   export const getGoalsAgainst = (() => {
   let map5 = new Map()
   let emptyArr = []
-  data.map((item) => map5.set(...Object.entries(item.score)))
+  cloneData.map((item) => map5.set(...Object.entries(item.score)))
   let arrOfMap5 = [...map5]
   let result = arrOfMap5.map((arr) =>  arr.reduce((a, e) => {
     return [
